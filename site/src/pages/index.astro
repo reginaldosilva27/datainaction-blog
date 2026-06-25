@@ -36,28 +36,56 @@ const yt = (id) => `https://www.youtube.com/watch?v=${id}`;
 const thumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 ---
 <Base
-  title="DataInAction — Dados & IA na prática"
+  title="DataInAction · Dados e IA na prática"
   description="Blog de Dados e Inteligência Artificial por Reginaldo Silva: Databricks, Azure, RAG, Agentes de IA e engenharia de dados na prática."
 >
   <section class="hero">
-    <p class="hero-kicker">Blog de dados e IA · por Reginaldo Silva</p>
-    <h1>Anotações práticas sobre engenharia de dados e inteligência artificial.</h1>
-    <p class="hero-sub">
-      Tutoriais, experimentos e bastidores do dia a dia — de Databricks, Delta Lake e Azure
-      a RAG e agentes de IA em produção.
-    </p>
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#arquivo">Ver artigos</a>
-      <a class="btn btn-ghost" href={videos.channel} target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
-        Canal no YouTube
-      </a>
+    <div class="hero-main">
+      <p class="hero-kicker">Blog de dados e IA · por Reginaldo Silva</p>
+      <h1>Conteúdo prático sobre engenharia de dados, inteligência artificial e agentes de IA.</h1>
+      <p class="hero-sub">
+        Tutoriais, experimentos e bastidores do dia a dia de Databricks, Delta Lake, Azure AI Services,
+        Microsoft Foundry, Copilot, RAG e agentes de IA em produção, AI Engineering.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#arquivo">Ver artigos</a>
+        <a class="btn btn-ghost" href={videos.channel} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
+          Canal no YouTube
+        </a>
+      </div>
+      <div class="hero-stats">
+        <span><b>{total}</b> artigos</span>
+        <span><b>26</b> vídeos</span>
+        <span><b>980+</b> min de vídeo</span>
+        <span><b>13+</b> anos em dados</span>
+      </div>
     </div>
-    <div class="hero-stats">
-      <span><b>{total}</b> artigos</span>
-      <span><b>{totalMin}+</b> min de leitura</span>
-      <span><b>13+</b> anos em dados</span>
-    </div>
+
+    <aside class="hero-aside">
+      <p class="aside-title">O que você encontra por aqui</p>
+      <div class="tech-group">
+        <span class="tech-label" style="--c:#e8502e">Dados</span>
+        <div class="tech-tags">
+          <span>Databricks</span><span>Delta Lake</span><span>Apache Spark</span>
+          <span>Unity Catalog</span><span>Lakehouse</span><span>PySpark</span>
+        </div>
+      </div>
+      <div class="tech-group">
+        <span class="tech-label" style="--c:#7c3aed">IA &amp; Agentes</span>
+        <div class="tech-tags">
+          <span>Agentes de IA</span><span>RAG</span><span>LangGraph</span>
+          <span>CrewAI</span><span>MCP</span><span>Copilot</span><span>AI Engineering</span>
+        </div>
+      </div>
+      <div class="tech-group">
+        <span class="tech-label" style="--c:#2563eb">Cloud</span>
+        <div class="tech-tags">
+          <span>Azure</span><span>Azure AI Services</span><span>Microsoft Foundry</span>
+          <span>AWS</span><span>GCP</span>
+        </div>
+      </div>
+    </aside>
   </section>
 
   <!-- ===== Destaque: AI Agent Simulator ===== -->
@@ -95,7 +123,7 @@ const thumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
       <div>
         <span class="block-eyebrow accent-ia">Inteligência Artificial</span>
         <h2>Destaques de IA</h2>
-        <p class="block-desc">Os conteúdos de IA &amp; Agentes mais acessados — do CrewAI a agentes em produção.</p>
+        <p class="block-desc">Os conteúdos de IA &amp; Agentes mais acessados, do CrewAI a agentes em produção.</p>
       </div>
       <a class="block-link" href="#arquivo" data-cat-jump="ia">Ver todos de IA →</a>
     </div>

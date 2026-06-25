@@ -30,7 +30,7 @@ body = body.replace(new RegExp(YT, 'gis'), (_m, id) => facade(id));
 
 const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0, 8);
 ---
-<Base title={`${post.title} — DataInAction`} description={post.excerpt} post={true}>
+<Base title={`${post.title} · DataInAction`} description={post.excerpt} post={true}>
   <article class="post">
     <a class="back" href={base}>← Voltar ao blog</a>
     <p class="post-eyebrow"><span class="chip" style={`--c:${meta.color}`}>{meta.label}</span></p>
