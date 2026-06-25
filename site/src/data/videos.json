@@ -1,0 +1,83 @@
+{
+  "channel": "https://www.youtube.com/@dadosemacao",
+  "agentSimulator": [
+    {
+      "id": "jbOcHPyvQN4",
+      "title": "AI Agent Simulator #3 — Métodos de Chunking visual e suporte a Ollama (modelos locais)",
+      "views": "134 visualizações",
+      "when": "há 4 dias"
+    },
+    {
+      "id": "Ay-KCUS8zYs",
+      "title": "AI Agent Simulator #2 — RAG, RAGLess e DeepAgents na prática, de forma visual",
+      "views": "142 visualizações",
+      "when": "há 10 dias"
+    },
+    {
+      "id": "8dQgipzyY1c",
+      "title": "AI Agent Simulator #1 — Como funciona um Agent Harness, aprenda na prática",
+      "views": "280 visualizações",
+      "when": "há 2 semanas"
+    }
+  ],
+  "popular": [
+    {
+      "id": "I-n9iTb6nis",
+      "title": "CrewAI + FastAPI + Streamlit — Criando uma aplicação com Agentes inteligentes",
+      "views": "7 mil visualizações",
+      "tag": "IA"
+    },
+    {
+      "id": "WDfwG4V4eOA",
+      "title": "Quanto custa o Databricks? Dá para economizar depois desse vídeo?",
+      "views": "2,2 mil visualizações",
+      "tag": "Databricks"
+    },
+    {
+      "id": "koylfcfRrJU",
+      "title": "Databricks 0 a 100 [5] — Unity Catalog Parte 1: tudo que você precisa saber",
+      "views": "2 mil visualizações",
+      "tag": "Databricks"
+    },
+    {
+      "id": "E-iIV3iZKbo",
+      "title": "Databricks 0 a 100 [0] — Terraform e Databricks",
+      "views": "1,6 mil visualizações",
+      "tag": "Databricks"
+    },
+    {
+      "id": "c6ScOhu-iWs",
+      "title": "Databricks 0 a 100 [6] — Unity Catalog Parte 2: tudo que você precisa saber",
+      "views": "1,1 mil visualizações",
+      "tag": "Databricks"
+    },
+    {
+      "id": "f8IOAqRFuwI",
+      "title": "CrewAI — Agentes criando um Assessment Report do Azure Databricks por $0,02",
+      "views": "1 mil visualizações",
+      "tag": "IA"
+    }
+  ],
+  "ai": [
+    {
+      "id": "I-n9iTb6nis",
+      "title": "CrewAI + FastAPI + Streamlit — Aplicação com Agentes inteligentes",
+      "views": "7 mil visualizações"
+    },
+    {
+      "id": "f8IOAqRFuwI",
+      "title": "CrewAI — Assessment Report do Azure Databricks por $0,02",
+      "views": "1 mil visualizações"
+    },
+    {
+      "id": "mA1At_BafkY",
+      "title": "CrewAI — Agentes criando e rodando código?!",
+      "views": "700 visualizações"
+    },
+    {
+      "id": "ny2e4zusCNI",
+      "title": "CrewAI — Criando documentações com Agentes inteligentes",
+      "views": "582 visualizações"
+    }
+  ]
+}

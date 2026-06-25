@@ -1,71 +1,214 @@
 ---
 import Base from '../layouts/Base.astro';
 import posts from '../data/posts.json';
+import videos from '../data/videos.json';
+import { CATEGORIES, categoryOf, categoryMeta } from '../lib/categories.js';
 
 const base = import.meta.env.BASE_URL;
-const sorted = [...posts].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
-const [featured, ...rest] = sorted;
 const fmt = (d) => (d ? new Date(d).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }) : '');
+
+const sorted = [...posts].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+const withCat = sorted.map((p) => ({ ...p, cat: categoryOf(p) }));
+
 const total = posts.length;
 const totalMin = posts.reduce((s, p) => s + (p.minutesToRead ?? 0), 0);
+const years = sorted.map((p) => p.date && new Date(p.date).getFullYear()).filter(Boolean);
+const yearSpan = `${Math.min(...years)}–${Math.max(...years)}`;
+
+// Destaques de IA — posts de IA mais vistos (views vindas do YouTube).
+const iaViews = {
+  'crewai-fastapi-streamlit-criar-uma-aplicação-com-agentes-inteligentes': '7 mil views',
+  'crewai-agentes-inteligentes-criando-um-assessment-report-do-azure-databricks-por-apenas-0-02': '1 mil views',
+  'crewai-agentes-criando-e-rodando-código': '700 views',
+  'crewai-criando-documentações-com-agentes-inteligentes': '582 views',
+  'databricks-english-sdk-ai-é-o-fim-dos-engenheiros-de-dados': null,
+  'databricks-ai-suggested-comment-documente-suas-tabelas-de-forma-simples-rápida-e-automática': null,
+};
+const iaFeatured = withCat
+  .filter((p) => p.cat === 'ia')
+  .sort((a, b) => (iaViews[a.slug] ? -1 : 1))
+  .slice(0, 4)
+  .map((p) => ({ ...p, viewLabel: iaViews[p.slug] }));
+
+// Contagem por categoria para o filtro.
+const counts = {};
+withCat.forEach((p) => (counts[p.cat] = (counts[p.cat] ?? 0) + 1));
+
+const yt = (id) => `https://www.youtube.com/watch?v=${id}`;
+const thumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 ---
-<Base title="DataInAction — Engenharia de dados na prática" description="Blog sobre Databricks, Azure e engenharia de dados por Reginaldo Silva.">
+<Base
+  title="DataInAction — Dados & IA na prática"
+  description="Blog de Dados e Inteligência Artificial por Reginaldo Silva: Databricks, Azure, RAG, Agentes de IA e engenharia de dados na prática."
+>
   <section class="hero">
-    <p class="hero-kicker">Databricks · Azure · Data Engineering</p>
-    <h1>Engenharia de dados <em>na prática</em>.</h1>
+    <p class="hero-kicker">Databricks · Azure · RAG · Agentes de IA</p>
+    <h1>Dados &amp; IA <em>na prática</em>.</h1>
     <p class="hero-sub">
-      Tutoriais, experimentos e bastidores de quem coloca dados pra trabalhar todo dia — Databricks,
-      Delta Lake, Azure e o que mais aparecer no caminho.
+      Tutoriais, experimentos e bastidores de quem coloca dados e inteligência artificial pra
+      trabalhar todo dia — de Lakehouse e Delta Lake a agentes de IA em produção.
     </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#arquivo">Explorar artigos</a>
+      <a class="btn btn-ghost" href={videos.channel} target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg>
+        Inscreva-se no canal
+      </a>
+    </div>
     <div class="hero-stats">
       <span><b>{total}</b> artigos</span>
-      <span><b>{totalMin}</b> min de leitura</span>
-      <span><b>{new Date(sorted[sorted.length - 1]?.date).getFullYear()}–{new Date(featured?.date).getFullYear()}</b> arquivo</span>
+      <span><b>{totalMin}+</b> min de leitura</span>
+      <span><b>{yearSpan}</b> de arquivo</span>
+      <span><b>13+</b> anos em dados</span>
     </div>
   </section>
 
-  {featured && (
-    <section class="featured">
-      <a href={`${base}blog/${featured.slug}/`}>
-        <div class="f-text">
-          <span class="f-tag">★ Em destaque</span>
-          <h3>{featured.title}</h3>
-          <p>{featured.excerpt}</p>
-          <span class="read-more">Ler artigo →</span>
-        </div>
-        {featured.cover && (
-          <div class="f-cover">
-            <img src={`${base}${featured.cover}`} alt={featured.title} />
+  <!-- ===== Destaque: AI Agent Simulator ===== -->
+  <section class="block">
+    <div class="block-head">
+      <div>
+        <span class="block-eyebrow accent-ia">★ Em destaque · novidade</span>
+        <h2>AI Agent Simulator</h2>
+        <p class="block-desc">
+          Minha série mais recente: entendendo Agent Harness, RAG/RAGLess, DeepAgents e chunking
+          de forma visual e prática. Confira os últimos episódios.
+        </p>
+      </div>
+      <a class="block-link" href={videos.channel} target="_blank" rel="noopener">Ver no YouTube →</a>
+    </div>
+    <div class="video-row">
+      {videos.agentSimulator.map((v) => (
+        <article class="video-card">
+          <div class="yt-facade" data-id={v.id} data-title={v.title}>
+            <img src={thumb(v.id)} alt={v.title} loading="lazy" />
+            <span class="yt-play" aria-hidden="true"></span>
           </div>
-        )}
-      </a>
-    </section>
-  )}
+          <div class="video-meta">
+            <h3>{v.title}</h3>
+            <span class="video-sub">{v.views} · {v.when}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
 
-  <div class="section-head">
-    <h2>Todos os artigos</h2>
-    <span class="count">{rest.length.toString().padStart(2, '0')}</span>
+  <!-- ===== Destaques de IA ===== -->
+  <section class="block">
+    <div class="block-head">
+      <div>
+        <span class="block-eyebrow accent-ia">Inteligência Artificial</span>
+        <h2>Destaques de IA</h2>
+        <p class="block-desc">Os conteúdos de IA &amp; Agentes mais acessados — do CrewAI a agentes em produção.</p>
+      </div>
+      <a class="block-link" href="#arquivo" data-cat-jump="ia">Ver todos de IA →</a>
+    </div>
+    <div class="grid grid-4">
+      {iaFeatured.map((p, i) => (
+        <a class="card" href={`${base}blog/${p.slug}/`} style={`--i:${i}`}>
+          {p.cover && (
+            <div class="card-cover">
+              <img src={`${base}${p.cover}`} alt={p.title} loading="lazy" />
+              {p.viewLabel && <span class="card-badge">▶ {p.viewLabel}</span>}
+            </div>
+          )}
+          <div class="card-body">
+            <span class="chip" style="--c:#a78bfa">IA & Agentes</span>
+            <h3>{p.title}</h3>
+            <span class="card-foot">Ler →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== Vídeos mais vistos ===== -->
+  <section class="block">
+    <div class="block-head">
+      <div>
+        <span class="block-eyebrow accent-red">YouTube · @dadosemacao</span>
+        <h2>Vídeos mais vistos</h2>
+        <p class="block-desc">Os vídeos que mais bombaram no canal. Clique pra assistir aqui mesmo.</p>
+      </div>
+      <a class="block-link" href={videos.channel} target="_blank" rel="noopener">Ir para o canal →</a>
+    </div>
+    <div class="video-row video-row-3">
+      {videos.popular.map((v) => (
+        <article class="video-card">
+          <div class="yt-facade" data-id={v.id} data-title={v.title}>
+            <img src={thumb(v.id)} alt={v.title} loading="lazy" />
+            <span class="yt-play" aria-hidden="true"></span>
+            <span class="video-views">{v.views}</span>
+          </div>
+          <div class="video-meta">
+            <span class="chip" style={`--c:${v.tag === 'IA' ? '#a78bfa' : '#ff5e3a'}`}>{v.tag}</span>
+            <h3>{v.title}</h3>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== Arquivo com filtro por categoria ===== -->
+  <div class="section-head" id="arquivo">
+    <h2>Arquivo completo</h2>
+    <span class="count">{total.toString().padStart(2, '0')}</span>
   </div>
 
-  <section class="grid">
-    {rest.map((p, i) => (
-      <a class="card" href={`${base}blog/${p.slug}/`} style={`--i:${i}`}>
-        {p.cover && (
-          <div class="card-cover">
-            <img src={`${base}${p.cover}`} alt={p.title} loading="lazy" />
-          </div>
-        )}
-        <div class="card-body">
-          <div class="card-meta">
-            <span>{fmt(p.date)}</span>
-            <span class="dot">•</span>
-            <span>{p.minutesToRead ?? '?'} min</span>
-          </div>
-          <h3>{p.title}</h3>
-          <p>{p.excerpt}</p>
-          <span class="card-foot">Ler →</span>
-        </div>
-      </a>
+  <div class="filters" role="tablist">
+    <button class="filter is-active" data-filter="all">Todos <span>{total}</span></button>
+    {CATEGORIES.map((c) => (
+      counts[c.key] ? (
+        <button class="filter" data-filter={c.key} style={`--c:${c.color}`}>
+          {c.label} <span>{counts[c.key]}</span>
+        </button>
+      ) : null
     ))}
+  </div>
+
+  <section class="grid" id="archive-grid">
+    {withCat.map((p, i) => {
+      const meta = categoryMeta(p.cat);
+      return (
+        <a class="card" href={`${base}blog/${p.slug}/`} data-cat={p.cat} style={`--i:${Math.min(i, 12)}`}>
+          {p.cover && (
+            <div class="card-cover">
+              <img src={`${base}${p.cover}`} alt={p.title} loading="lazy" />
+            </div>
+          )}
+          <div class="card-body">
+            <div class="card-meta">
+              <span class="chip" style={`--c:${meta.color}`}>{meta.label}</span>
+              <span class="card-meta-dim">{fmt(p.date)} · {p.minutesToRead ?? '?'} min</span>
+            </div>
+            <h3>{p.title}</h3>
+            <p>{p.excerpt}</p>
+            <span class="card-foot">Ler →</span>
+          </div>
+        </a>
+      );
+    })}
   </section>
+
+  <script is:inline>
+    (() => {
+      const setup = () => {
+        const grid = document.getElementById('archive-grid');
+        if (!grid) return;
+        const cards = [...grid.querySelectorAll('.card')];
+        const buttons = [...document.querySelectorAll('.filter')];
+        const apply = (f) => {
+          cards.forEach((c) => {
+            c.style.display = f === 'all' || c.dataset.cat === f ? '' : 'none';
+          });
+          buttons.forEach((b) => b.classList.toggle('is-active', b.dataset.filter === f));
+        };
+        buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter)));
+        document.querySelectorAll('[data-cat-jump]').forEach((el) =>
+          el.addEventListener('click', () => apply(el.dataset.catJump))
+        );
+      };
+      setup();
+      document.addEventListener('astro:page-load', setup);
+    })();
+  </script>
 </Base>

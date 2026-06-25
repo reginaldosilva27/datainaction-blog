@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import posts from '../../data/posts.json';
+import { categoryOf, categoryMeta } from '../../lib/categories.js';
 
 export function getStaticPaths() {
   return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
@@ -11,14 +12,28 @@ const base = import.meta.env.BASE_URL;
 const date = post.date
   ? new Date(post.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
   : '';
-// As URLs de imagem no html já vêm como caminhos relativos "images/..."; prefixamos com base.
-const body = post.html.replaceAll('src="images/', `src="${base}images/`);
-const tags = (post.tags ?? []).slice(0, 8);
+const meta = categoryMeta(categoryOf(post));
+
+// As URLs de imagem no html já vêm como caminhos relativos "images/...".
+let body = post.html.replaceAll('src="images/', `src="${base}images/`);
+
+// Converte links do YouTube em preview de vídeo (facade clicável → iframe).
+const facade = (id) =>
+  `<div class="yt-facade yt-embed" data-id="${id}" data-title="Assista no YouTube">` +
+  `<img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="Assista no YouTube" loading="lazy">` +
+  `<span class="yt-play" aria-hidden="true"></span></div>`;
+const YT = '<a\\b[^>]*href="https?:\\/\\/(?:youtu\\.be\\/|(?:www\\.)?youtube\\.com\\/watch\\?v=)([\\w-]{6,})"[^>]*>.*?<\\/a>';
+// 1) quando o link está sozinho dentro de um <p>, troca o <p> inteiro
+body = body.replace(new RegExp(`<p[^>]*>\\s*(?:${YT})\\s*<\\/p>`, 'gis'), (_m, id) => facade(id));
+// 2) qualquer link remanescente
+body = body.replace(new RegExp(YT, 'gis'), (_m, id) => facade(id));
+
+const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0, 8);
 ---
 <Base title={`${post.title} — DataInAction`} description={post.excerpt} post={true}>
   <article class="post">
     <a class="back" href={base}>← Voltar ao arquivo</a>
-    <p class="post-eyebrow">Artigo</p>
+    <p class="post-eyebrow"><span class="chip" style={`--c:${meta.color}`}>{meta.label}</span></p>
     <h1 class="post-title">{post.title}</h1>
     <div class="post-meta">
       <span>{date}</span>
@@ -38,6 +53,14 @@ const tags = (post.tags ?? []).slice(0, 8);
       </div>
     )}
 
-    <a class="back" href={base} style="margin-top:48px">← Voltar ao arquivo</a>
+    <div class="post-cta">
+      <p>Gostou? Tem mais no YouTube e no LinkedIn.</p>
+      <div class="about-actions">
+        <a class="btn btn-primary" href="https://www.youtube.com/@dadosemacao" target="_blank" rel="noopener">Inscreva-se no canal</a>
+        <a class="btn btn-ghost" href={`${base}sobre/`}>Sobre o autor</a>
+      </div>
+    </div>
+
+    <a class="back" href={base} style="margin-top:40px">← Voltar ao arquivo</a>
   </article>
 </Base>
