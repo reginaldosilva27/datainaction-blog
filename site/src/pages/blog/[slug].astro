@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import posts from '../../data/posts.json';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
+}
+
+const { post } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const date = post.date ? new Date(post.date).toLocaleDateString('pt-BR') : '';
+// As URLs de imagem no html já vêm como caminhos relativos "images/..."; prefixamos com base.
+const body = post.html.replaceAll('src="images/', `src="${base}images/`);
+---
+<Base title={post.title} description={post.excerpt}>
+  <a class="back" href={base}>← Voltar</a>
+  <h1 class="post-title">{post.title}</h1>
+  <div class="post-meta">{date} · {post.minutesToRead ?? '?'} min de leitura</div>
+  {post.cover && <img class="post-cover" src={`${base}${post.cover}`} alt={post.title} />}
+  <article class="post-body" set:html={body}></article>
+</Base>

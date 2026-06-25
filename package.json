@@ -1,0 +1,15 @@
+{
+  "name": "wix-blog-to-firebase",
+  "version": "1.0.0",
+  "description": "Exporta todos os blog posts do Wix e migra para Firebase (Firestore + Storage)",
+  "type": "module",
+  "scripts": {
+    "export": "node src/export-wix.js",
+    "migrate": "node src/migrate-firebase.js",
+    "all": "node src/export-wix.js && node src/migrate-firebase.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "firebase-admin": "^12.7.0"
+  }
+}
