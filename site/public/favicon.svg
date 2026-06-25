@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="15" fill="#1a1a1f"/>
+  <!-- slash da marca data/in/action -->
+  <path d="M37 16 L27 48" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <!-- ponto de dados (accent) -->
+  <circle cx="20" cy="22" r="6" fill="#e8502e"/>
+</svg>
