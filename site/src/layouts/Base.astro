@@ -1,5 +1,8 @@
 ---
-const { title, description } = Astro.props;
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+const { title, description, post = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -8,17 +11,53 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles/global.css`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <ClientRouter />
   </head>
   <body>
+    {post && <div class="progress" id="progress"></div>}
+    <div class="grain" aria-hidden="true"></div>
+
     <header class="site-header">
-      <a href={import.meta.env.BASE_URL} class="brand">📊 Blog</a>
+      <a href={base} class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-text">data<span class="brand-slash">/</span>in<span class="brand-slash">/</span>action</span>
+      </a>
+      <nav class="site-nav">
+        <a href={base}>Arquivo</a>
+        <a href="https://github.com/reginaldosilva27" target="_blank" rel="noopener">GitHub</a>
+      </nav>
     </header>
+
     <main>
       <slot />
     </main>
+
     <footer class="site-footer">
-      <p>Migrado do Wix · publicado no GitHub Pages</p>
+      <div class="footer-mark">data<span class="brand-slash">/</span>in<span class="brand-slash">/</span>action</div>
+      <p>Engenharia de dados na prática · por Reginaldo Silva</p>
+      <p class="footer-fine">Site estático feito com Astro · publicado no GitHub Pages</p>
     </footer>
+
+    {post && (
+      <script is:inline>
+        (() => {
+          const bar = document.getElementById('progress');
+          if (!bar) return;
+          const update = () => {
+            const h = document.documentElement;
+            const max = h.scrollHeight - h.clientHeight;
+            bar.style.transform = `scaleX(${max > 0 ? h.scrollTop / max : 0})`;
+          };
+          update();
+          document.addEventListener('scroll', update, { passive: true });
+        })();
+      </script>
+    )}
   </body>
 </html>

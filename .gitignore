@@ -2,14 +2,12 @@
 node_modules/
 site/node_modules/
 
-# segredos / dados de migração (NÃO versionar)
-.env
-serviceAccountKey.json
-/data/
-
 # build do Astro
 site/dist/
 site/.astro/
+
+# ambiente local
+.env
 
 # OBS: site/public/images/ e site/src/data/posts.json DEVEM ser versionados
 # (o GitHub Actions só roda `astro build`, não regera essas imagens).

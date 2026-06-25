@@ -1,33 +1,52 @@
-# Migração Blog Wix → Firebase
+# data/in/action
 
-Exporta todos os blog posts do Wix (via API) e migra para Firebase (Firestore + Storage),
-re-hospedando as imagens e trocando as URLs no conteúdo.
+Blog **DataInAction** — engenharia de dados na prática, por Reginaldo Silva.
 
-## Fluxo
+Site estático construído com [Astro](https://astro.build), hospedado no GitHub Pages
+em **[datainaction.dev](https://datainaction.dev)**.
 
-1. `npm run export`  → busca paginada no Wix, salva `data/wix-posts.json`
-2. `npm run migrate` → baixa imagens, sobe no Storage, grava posts no Firestore
-3. `npm run all`     → faz os dois em sequência
+## Estrutura
 
-## Setup
-
-```bash
-npm install
-cp .env.example .env   # preencha os valores
+```
+.
+├─ .github/workflows/deploy.yml   # build + deploy automático no GitHub Pages
+└─ site/                          # projeto Astro
+   ├─ astro.config.mjs
+   ├─ public/
+   │  ├─ CNAME                    # domínio próprio (datainaction.dev)
+   │  └─ images/                  # imagens dos posts (versionadas)
+   └─ src/
+      ├─ data/posts.json          # conteúdo dos posts (versionado)
+      ├─ layouts/Base.astro       # layout base (header, footer, transições)
+      ├─ pages/
+      │  ├─ index.astro           # arquivo / lista de posts
+      │  └─ blog/[slug].astro     # página de cada post
+      └─ styles/global.css
 ```
 
-### Wix
-- `WIX_API_KEY` — token que **você** gera em *Conta → Chaves de API → Gerar chave de API*
-  (permissões de **Blog → Read**; e **Media Manager** se quiser garantir acesso às mídias).
-- `WIX_SITE_ID` — **Site ID** (não confunda com o "ID da conta"). É o GUID do site na URL do dashboard.
+Os posts vivem em `site/src/data/posts.json` e as imagens em `site/public/images/`.
+Ambos são versionados — o deploy só roda `astro build`, sem gerar esses arquivos.
 
-### Firebase
-- `GOOGLE_APPLICATION_CREDENTIALS` — caminho do JSON de service account
-  (*Console Firebase → Configurações do projeto → Contas de serviço → Gerar nova chave privada*).
-- `FIREBASE_STORAGE_BUCKET` — ex.: `meu-projeto.appspot.com` ou `meu-projeto.firebasestorage.app`.
+## Desenvolvimento
 
-## Observações
-- O `migrate` é **idempotente**: usa `doc(post.id).set(..., {merge:true})` e cacheia imagens já enviadas,
-  então pode rodar de novo sem duplicar.
-- Por padrão o `query` retorna apenas posts **publicados**. Rascunhos exigem outro endpoint/permissão.
-- As imagens vão para o Storage como **públicas** (`makePublic`). Ajuste se quiser regras restritas.
+```bash
+cd site
+npm install
+npm run dev      # servidor local em http://localhost:4321
+```
+
+Outros comandos:
+
+```bash
+npm run build    # gera o site estático em site/dist/
+npm run preview  # serve o build localmente
+```
+
+## Deploy
+
+O deploy é automático: todo push na branch `main` dispara o workflow
+`.github/workflows/deploy.yml`, que faz o `astro build` da pasta `site/` e
+publica no GitHub Pages. Também pode ser disparado manualmente via
+*workflow_dispatch*.
+
+O domínio próprio é configurado pelo arquivo `site/public/CNAME`.

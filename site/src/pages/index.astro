@@ -4,22 +4,68 @@ import posts from '../data/posts.json';
 
 const base = import.meta.env.BASE_URL;
 const sorted = [...posts].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
-const fmt = (d) => (d ? new Date(d).toLocaleDateString('pt-BR') : '');
+const [featured, ...rest] = sorted;
+const fmt = (d) => (d ? new Date(d).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }) : '');
+const total = posts.length;
+const totalMin = posts.reduce((s, p) => s + (p.minutesToRead ?? 0), 0);
 ---
-<Base title="Blog" description="Posts migrados do Wix">
-  <h1>Posts</h1>
-  <ul class="post-list">
-    {sorted.map((p) => (
-      <li>
-        <a class="card" href={`${base}blog/${p.slug}/`}>
-          {p.cover && <img src={`${base}${p.cover}`} alt={p.title} loading="lazy" />}
-          <div class="card-body">
-            <div class="card-meta">{fmt(p.date)} · {p.minutesToRead ?? '?'} min</div>
-            <h2>{p.title}</h2>
-            <p>{p.excerpt}</p>
+<Base title="DataInAction — Engenharia de dados na prática" description="Blog sobre Databricks, Azure e engenharia de dados por Reginaldo Silva.">
+  <section class="hero">
+    <p class="hero-kicker">Databricks · Azure · Data Engineering</p>
+    <h1>Engenharia de dados <em>na prática</em>.</h1>
+    <p class="hero-sub">
+      Tutoriais, experimentos e bastidores de quem coloca dados pra trabalhar todo dia — Databricks,
+      Delta Lake, Azure e o que mais aparecer no caminho.
+    </p>
+    <div class="hero-stats">
+      <span><b>{total}</b> artigos</span>
+      <span><b>{totalMin}</b> min de leitura</span>
+      <span><b>{new Date(sorted[sorted.length - 1]?.date).getFullYear()}–{new Date(featured?.date).getFullYear()}</b> arquivo</span>
+    </div>
+  </section>
+
+  {featured && (
+    <section class="featured">
+      <a href={`${base}blog/${featured.slug}/`}>
+        <div class="f-text">
+          <span class="f-tag">★ Em destaque</span>
+          <h3>{featured.title}</h3>
+          <p>{featured.excerpt}</p>
+          <span class="read-more">Ler artigo →</span>
+        </div>
+        {featured.cover && (
+          <div class="f-cover">
+            <img src={`${base}${featured.cover}`} alt={featured.title} />
           </div>
-        </a>
-      </li>
+        )}
+      </a>
+    </section>
+  )}
+
+  <div class="section-head">
+    <h2>Todos os artigos</h2>
+    <span class="count">{rest.length.toString().padStart(2, '0')}</span>
+  </div>
+
+  <section class="grid">
+    {rest.map((p, i) => (
+      <a class="card" href={`${base}blog/${p.slug}/`} style={`--i:${i}`}>
+        {p.cover && (
+          <div class="card-cover">
+            <img src={`${base}${p.cover}`} alt={p.title} loading="lazy" />
+          </div>
+        )}
+        <div class="card-body">
+          <div class="card-meta">
+            <span>{fmt(p.date)}</span>
+            <span class="dot">•</span>
+            <span>{p.minutesToRead ?? '?'} min</span>
+          </div>
+          <h3>{p.title}</h3>
+          <p>{p.excerpt}</p>
+          <span class="card-foot">Ler →</span>
+        </div>
+      </a>
     ))}
-  </ul>
+  </section>
 </Base>
