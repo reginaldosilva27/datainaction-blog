@@ -482,18 +482,54 @@ a { color: inherit; }
   text-align: center;
   margin-top: 10px;
 }
-.post-body pre {
-  background: var(--code-bg);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
+/* ---- componente de código ---- */
+.post-body .codeblock {
+  margin: 1.9em 0;
+  border: 1px solid var(--border-strong);
   border-radius: 12px;
-  padding: 20px 22px;
-  overflow-x: auto;
-  margin: 1.8em 0;
-  font-size: 0.86rem;
-  line-height: 1.6;
+  overflow: hidden;
+  background: var(--code-bg);
+  box-shadow: 0 10px 28px rgba(17, 17, 22, 0.12);
 }
-.post-body pre code { font-family: var(--font-mono); color: #e6edf3; background: none; padding: 0; }
+.codeblock-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px 9px 14px;
+  background: #15161c;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.codeblock-dots { display: inline-flex; gap: 7px; }
+.codeblock-dots i {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+.codeblock-dots i:first-child { background: var(--accent); }
+.codeblock-copy {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #c4ccd8;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 7px;
+  padding: 4px 11px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+.codeblock-copy:hover { color: #fff; background: rgba(255, 255, 255, 0.12); }
+.codeblock-copy.copied { color: #34d399; border-color: rgba(52, 211, 153, 0.5); }
+.post-body .codeblock pre {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: var(--code-bg);
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-size: 0.86rem;
+  line-height: 1.65;
+}
+.post-body .codeblock pre code { font-family: var(--font-mono); color: #e6edf3; background: none; padding: 0; border: none; white-space: pre; }
 .post-body code {
   font-family: var(--font-mono);
   font-size: 0.86em;

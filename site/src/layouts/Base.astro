@@ -118,5 +118,28 @@ const social = {
         document.addEventListener('astro:page-load', wire);
       })();
     </script>
+
+    <!-- Copiar código -->
+    <script is:inline>
+      (() => {
+        const wire = () => {
+          document.querySelectorAll('.codeblock-copy:not([data-wired])').forEach((btn) => {
+            btn.setAttribute('data-wired', '1');
+            btn.addEventListener('click', async () => {
+              const pre = btn.closest('.codeblock')?.querySelector('pre');
+              if (!pre) return;
+              try {
+                await navigator.clipboard.writeText(pre.innerText);
+                btn.textContent = 'Copiado!';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 1600);
+              } catch (e) { /* clipboard indisponível */ }
+            });
+          });
+        };
+        wire();
+        document.addEventListener('astro:page-load', wire);
+      })();
+    </script>
   </body>
 </html>

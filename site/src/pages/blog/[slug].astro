@@ -28,6 +28,17 @@ body = body.replace(new RegExp(`<p[^>]*>\\s*(?:${YT})\\s*<\\/p>`, 'gis'), (_m, i
 // 2) qualquer link remanescente
 body = body.replace(new RegExp(YT, 'gis'), (_m, id) => facade(id));
 
+// Código: alguns posts foram exportados com cada linha num <pre> separado.
+// Junta blocos <pre> adjacentes num único bloco e embrulha num componente com barra + copiar.
+body = body.replace(/<\/code>\s*<\/pre>\s*<pre>\s*<code>/gi, '\n');
+body = body.replace(/<\/pre>\s*<pre>/gi, '\n');
+body = body.replace(/<pre>([\s\S]*?)<\/pre>/gi, (_m, inner) =>
+  `<div class="codeblock"><div class="codeblock-bar">` +
+  `<span class="codeblock-dots"><i></i><i></i><i></i></span>` +
+  `<button class="codeblock-copy" type="button" aria-label="Copiar código">Copiar</button>` +
+  `</div><pre>${inner}</pre></div>`
+);
+
 const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0, 8);
 ---
 <Base title={`${post.title} · DataInAction`} description={post.excerpt} post={true}>
