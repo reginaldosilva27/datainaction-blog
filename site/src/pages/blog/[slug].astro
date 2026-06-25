@@ -32,7 +32,7 @@ const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0
 ---
 <Base title={`${post.title} — DataInAction`} description={post.excerpt} post={true}>
   <article class="post">
-    <a class="back" href={base}>← Voltar ao arquivo</a>
+    <a class="back" href={base}>← Voltar ao blog</a>
     <p class="post-eyebrow"><span class="chip" style={`--c:${meta.color}`}>{meta.label}</span></p>
     <h1 class="post-title">{post.title}</h1>
     <div class="post-meta">
@@ -61,6 +61,6 @@ const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0
       </div>
     </div>
 
-    <a class="back" href={base} style="margin-top:40px">← Voltar ao arquivo</a>
+    <a class="back" href={base} style="margin-top:40px">← Voltar ao blog</a>
   </article>
 </Base>
