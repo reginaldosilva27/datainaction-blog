@@ -1,8 +1,15 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
-const { title, description, post = false } = Astro.props;
+const { title, description, post = false, image } = Astro.props;
 const base = import.meta.env.BASE_URL;
+
+// URL absoluta da imagem de preview social (og:image/twitter:image).
+// Cada post passa a própria capa; sem capa, cai numa imagem padrão da marca.
+const site = Astro.site ?? new URL('https://datainaction.dev');
+const rawImage = image || `${base}og-default.png`;
+const ogImage = new URL(rawImage, site).href;
+const canonical = new URL(Astro.url.pathname, site).href;
 
 const social = {
   github: 'https://github.com/reginaldosilva27',
@@ -21,9 +28,18 @@ const social = {
     <meta name="theme-color" content="#1a1a1f" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content={post ? 'article' : 'website'} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="DataInAction" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
