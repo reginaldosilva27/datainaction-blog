@@ -10,6 +10,9 @@ export const CATEGORIES = [
 ];
 
 const RULES = [
+  // Produtos de IA do Databricks contam como Databricks (vêm antes da regra 'ia',
+  // senão "Agent Bricks" / "AI/BI" cairiam em IA & Agentes). Termos novos, sem colisão com posts antigos.
+  ['databricks', /genie|agent.?bricks|mosaic.?ai/i],
   ['ia', /crew\s?ai|agent|\bia\b|\bai\b|english.?sdk|ai.?suggested|intelig|multiagent|\bllm\b|gpt|copilot/i],
   ['delta', /delta.?lake|delta.?rs|delta.?table|replacewhere|deletion.?vector|time.?travel|change.?data.?feed|nunca.?mais.?leia.?parquet/i],
   ['databricks', /databricks|unity.?catalog|dbutils|dbfs|spark|workflow|cluster|photon|lakehouse|system.?table|metastore|vacuum|notebook|sql.?warehouse|dtstools/i],
