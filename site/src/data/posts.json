@@ -5,7 +5,8 @@
     "title_en": "Copilot Studio - Knowledge Base [1] - What Knowledge is and how it works under the hood",
     "excerpt": "Você pluga um SharePoint no agente e ele passa a responder sobre os seus documentos. Mas o que acontece por baixo dos panos? Esse é o bloco Knowledge.",
     "excerpt_en": "You plug a SharePoint into the agent and it starts answering about your documents. But what happens under the hood? That is the Knowledge block.",
-    "date": "2026-07-02T17:16:54.026Z",
+    "date": "2026-07-06T00:00:00-03:00",
+    "publishAt": "2026-07-06T00:00:00-03:00",
     "minutesToRead": 5,
     "tags": [
       "copilotstudio",
