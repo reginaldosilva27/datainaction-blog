@@ -82,13 +82,20 @@ const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0
   </style>
 
   <script>
-    // clicar numa imagem do post abre ela em tamanho real numa nova aba
-    document.querySelectorAll('.post-body img, .post-cover').forEach((im) => {
-      if (im.closest('.yt-facade')) return; // thumbnail do YouTube mantém o clique próprio
-      im.addEventListener('click', () => {
+    // Delegação no document: sobrevive à navegação com View Transitions (ClientRouter),
+    // então funciona tanto no load direto quanto ao entrar pela lista do blog.
+    // Clicar numa imagem do post abre ela em tamanho real numa nova aba.
+    if (!window.__imgNewTab) {
+      window.__imgNewTab = true;
+      document.addEventListener('click', (e) => {
+        const im = e.target.closest('.post-body img, .post-cover');
+        if (!im || im.closest('.yt-facade')) return; // ignora thumbnail do YouTube
         const src = im.currentSrc || im.src;
-        if (src) window.open(src, '_blank', 'noopener');
+        if (!src) return;
+        const a = document.createElement('a');
+        a.href = src; a.target = '_blank'; a.rel = 'noopener';
+        a.click(); // âncora target=_blank não é bloqueada por popup blocker
       });
-    });
+    }
   </script>
 </Base>
