@@ -12,10 +12,13 @@ const base = import.meta.env.BASE_URL;
 const date = post.date
   ? new Date(post.date).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })
   : '';
+const dateEn = post.date
+  ? new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' })
+  : '';
 const meta = categoryMeta(categoryOf(post));
 
-// As URLs de imagem no html já vêm como caminhos relativos "images/...".
-let body = post.html.replaceAll('src="images/', `src="${base}images/`);
+// Este post tem versão em inglês? (só a série recente traduzida tem html_en)
+const hasEn = Boolean(post.html_en);
 
 // Converte links do YouTube em preview de vídeo (facade clicável → iframe).
 const facade = (id) =>
@@ -23,40 +26,92 @@ const facade = (id) =>
   `<img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="Assista no YouTube" loading="lazy">` +
   `<span class="yt-play" aria-hidden="true"></span></div>`;
 const YT = '<a\\b[^>]*href="https?:\\/\\/(?:youtu\\.be\\/|(?:www\\.)?youtube\\.com\\/watch\\?v=)([\\w-]{6,})"[^>]*>.*?<\\/a>';
-// 1) quando o link está sozinho dentro de um <p>, troca o <p> inteiro
-body = body.replace(new RegExp(`<p[^>]*>\\s*(?:${YT})\\s*<\\/p>`, 'gis'), (_m, id) => facade(id));
-// 2) qualquer link remanescente
-body = body.replace(new RegExp(YT, 'gis'), (_m, id) => facade(id));
 
-// Código: alguns posts foram exportados com cada linha num <pre> separado.
-// Junta blocos <pre> adjacentes num único bloco e embrulha num componente com barra + copiar.
-body = body.replace(/<\/code>\s*<\/pre>\s*<pre>\s*<code>/gi, '\n');
-body = body.replace(/<\/pre>\s*<pre>/gi, '\n');
-body = body.replace(/<pre>([\s\S]*?)<\/pre>/gi, (_m, inner) =>
-  `<div class="codeblock"><div class="codeblock-bar">` +
-  `<span class="codeblock-dots"><i></i><i></i><i></i></span>` +
-  `<button class="codeblock-copy" type="button" aria-label="Copiar código">Copiar</button>` +
-  `</div><pre>${inner}</pre></div>`
-);
+// Aplica as mesmas transformações (imagens, YouTube, blocos de código) em qualquer corpo HTML.
+const processBody = (html) => {
+  // As URLs de imagem no html já vêm como caminhos relativos "images/...".
+  let body = html.replaceAll('src="images/', `src="${base}images/`);
+  // 1) quando o link está sozinho dentro de um <p>, troca o <p> inteiro
+  body = body.replace(new RegExp(`<p[^>]*>\\s*(?:${YT})\\s*<\\/p>`, 'gis'), (_m, id) => facade(id));
+  // 2) qualquer link remanescente
+  body = body.replace(new RegExp(YT, 'gis'), (_m, id) => facade(id));
+  // Código: alguns posts foram exportados com cada linha num <pre> separado.
+  // Junta blocos <pre> adjacentes num único bloco e embrulha num componente com barra + copiar.
+  body = body.replace(/<\/code>\s*<\/pre>\s*<pre>\s*<code>/gi, '\n');
+  body = body.replace(/<\/pre>\s*<pre>/gi, '\n');
+  body = body.replace(/<pre>([\s\S]*?)<\/pre>/gi, (_m, inner) =>
+    `<div class="codeblock"><div class="codeblock-bar">` +
+    `<span class="codeblock-dots"><i></i><i></i><i></i></span>` +
+    `<button class="codeblock-copy" type="button" aria-label="Copiar código">Copiar</button>` +
+    `</div><pre>${inner}</pre></div>`
+  );
+  return body;
+};
+
+const body = processBody(post.html);
+const bodyEn = hasEn ? processBody(post.html_en) : '';
 
 const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0, 8);
 ---
 <Base title={`${post.title} · DataInAction`} description={post.excerpt} post={true} image={post.cover ? `${base}${post.cover}` : undefined}>
-  <article class="post">
-    <a class="back" href={base}>← Voltar ao blog</a>
+  <article class="post" data-has-en={hasEn ? 'true' : undefined}>
+    <div class="post-top">
+      <a class="back" href={base}>
+        <span data-lang="pt">← Voltar ao blog</span>
+        {hasEn && <span data-lang="en" hidden>← Back to blog</span>}
+      </a>
+      {hasEn && (
+        <div class="lang-switch" role="group" aria-label="Idioma / Language">
+          <button type="button" class="lang-btn is-active" data-set-lang="pt" aria-pressed="true">
+            <svg class="flag" viewBox="0 0 28 20" width="22" height="16" aria-hidden="true">
+              <rect width="28" height="20" fill="#009c3b"/>
+              <polygon points="14,2.2 25.6,10 14,17.8 2.4,10" fill="#ffdf00"/>
+              <circle cx="14" cy="10" r="4.1" fill="#002776"/>
+            </svg>
+            <span>PT</span>
+          </button>
+          <button type="button" class="lang-btn" data-set-lang="en" aria-pressed="false">
+            <svg class="flag" viewBox="0 0 28 20" width="22" height="16" aria-hidden="true">
+              <rect width="28" height="20" fill="#b22234"/>
+              <g fill="#fff">
+                <rect y="1.54" width="28" height="1.54"/>
+                <rect y="4.62" width="28" height="1.54"/>
+                <rect y="7.69" width="28" height="1.54"/>
+                <rect y="10.77" width="28" height="1.54"/>
+                <rect y="13.85" width="28" height="1.54"/>
+                <rect y="16.92" width="28" height="1.54"/>
+              </g>
+              <rect width="12" height="10.77" fill="#3c3b6e"/>
+              <g fill="#fff">
+                <circle cx="2.4" cy="2.2" r=".7"/><circle cx="6" cy="2.2" r=".7"/><circle cx="9.6" cy="2.2" r=".7"/>
+                <circle cx="4.2" cy="4.4" r=".7"/><circle cx="7.8" cy="4.4" r=".7"/>
+                <circle cx="2.4" cy="6.6" r=".7"/><circle cx="6" cy="6.6" r=".7"/><circle cx="9.6" cy="6.6" r=".7"/>
+                <circle cx="4.2" cy="8.8" r=".7"/><circle cx="7.8" cy="8.8" r=".7"/>
+              </g>
+            </svg>
+            <span>EN</span>
+          </button>
+        </div>
+      )}
+    </div>
     <p class="post-eyebrow"><span class="chip" style={`--c:${meta.color}`}>{meta.label}</span></p>
-    <h1 class="post-title">{post.title}</h1>
+    <h1 class="post-title" data-lang="pt">{post.title}</h1>
+    {hasEn && <h1 class="post-title" data-lang="en" hidden>{post.title_en}</h1>}
     <div class="post-meta">
-      <span>{date}</span>
+      <span data-lang="pt">{date}</span>
+      {hasEn && <span data-lang="en" hidden>{dateEn}</span>}
       <span class="sep">/</span>
-      <span>{post.minutesToRead ?? '?'} min de leitura</span>
+      <span data-lang="pt">{post.minutesToRead ?? '?'} min de leitura</span>
+      {hasEn && <span data-lang="en" hidden>{post.minutesToRead ?? '?'} min read</span>}
       <span class="sep">/</span>
-      <span>por Reginaldo Silva</span>
+      <span data-lang="pt">por Reginaldo Silva</span>
+      {hasEn && <span data-lang="en" hidden>by Reginaldo Silva</span>}
     </div>
 
     {post.cover && <img class="post-cover" src={`${base}${post.cover}`} alt={post.title} />}
 
-    <div class="post-body" set:html={body}></div>
+    <div class="post-body" data-lang="pt" set:html={body}></div>
+    {hasEn && <div class="post-body" data-lang="en" hidden set:html={bodyEn}></div>}
 
     {tags.length > 0 && (
       <div class="tags">
@@ -65,20 +120,41 @@ const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0
     )}
 
     <div class="post-cta">
-      <p>Gostou? Tem mais no YouTube e no LinkedIn.</p>
+      <p data-lang="pt">Gostou? Tem mais no YouTube e no LinkedIn.</p>
+      {hasEn && <p data-lang="en" hidden>Enjoyed it? There's more on YouTube and LinkedIn.</p>}
       <div class="about-actions">
-        <a class="btn btn-primary" href="https://www.youtube.com/@dadosemacao" target="_blank" rel="noopener">Inscreva-se no canal</a>
-        <a class="btn btn-ghost" href={`${base}sobre/`}>Sobre o autor</a>
+        <a class="btn btn-primary" href="https://www.youtube.com/@dadosemacao" target="_blank" rel="noopener">
+          <span data-lang="pt">Inscreva-se no canal</span>
+          {hasEn && <span data-lang="en" hidden>Subscribe on YouTube</span>}
+        </a>
+        <a class="btn btn-ghost" href={`${base}sobre/`}>
+          <span data-lang="pt">Sobre o autor</span>
+          {hasEn && <span data-lang="en" hidden>About the author</span>}
+        </a>
       </div>
     </div>
 
-    <a class="back" href={base} style="margin-top:40px">← Voltar ao blog</a>
+    <a class="back" href={base} style="margin-top:40px">
+      <span data-lang="pt">← Voltar ao blog</span>
+      {hasEn && <span data-lang="en" hidden>← Back to blog</span>}
+    </a>
   </article>
 
   <style is:global>
     /* lupa só ao passar por cima das imagens do post (não no texto) */
     .post-body img, .post-cover { cursor: zoom-in; }
     .post-body .yt-facade img { cursor: pointer; }
+
+    /* Alternador PT/EN */
+    .post-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    [data-lang][hidden] { display: none !important; }
+    .lang-switch { display: inline-flex; gap: 4px; padding: 4px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: rgba(255,255,255,.03); }
+    .lang-btn { display: inline-flex; align-items: center; gap: 7px; appearance: none; border: 0; background: transparent; color: #9aa0a6; font: 700 13px/1 'Inter', system-ui, sans-serif; letter-spacing: .04em; padding: 7px 14px; border-radius: 999px; cursor: pointer; transition: color .15s ease, background .15s ease; }
+    .lang-btn .flag { display: block; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,.25); opacity: .6; filter: saturate(.85); transition: opacity .15s ease, filter .15s ease; }
+    .lang-btn:hover { color: #fff; }
+    .lang-btn:hover .flag { opacity: .9; }
+    .lang-btn.is-active { background: #ff5e3a; color: #fff; }
+    .lang-btn.is-active .flag { opacity: 1; filter: none; box-shadow: 0 0 0 1px rgba(0,0,0,.35); }
   </style>
 
   <script>

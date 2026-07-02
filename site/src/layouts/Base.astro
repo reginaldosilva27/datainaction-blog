@@ -159,6 +159,43 @@ const social = {
       })();
     </script>
 
+    <!-- Alternador de idioma PT/EN (só nos posts com tradução: .post[data-has-en]) -->
+    <script is:inline>
+      (() => {
+        const KEY = 'diaLang';
+        const apply = (lang) => {
+          const scope = document.querySelector('.post[data-has-en="true"]');
+          const use = scope && lang === 'en' ? 'en' : 'pt';
+          document.querySelectorAll('.post [data-lang]').forEach((el) => {
+            el.hidden = el.getAttribute('data-lang') !== use;
+          });
+          document.querySelectorAll('.lang-btn').forEach((b) => {
+            const active = b.getAttribute('data-set-lang') === use;
+            b.classList.toggle('is-active', active);
+            b.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+        };
+        const sync = () => {
+          const scope = document.querySelector('.post[data-has-en="true"]');
+          let lang = 'pt';
+          if (scope) {
+            const q = new URL(location.href).searchParams.get('lang');
+            lang = (q || localStorage.getItem(KEY) || 'pt').toLowerCase();
+          }
+          apply(lang === 'en' ? 'en' : 'pt');
+        };
+        document.addEventListener('click', (e) => {
+          const btn = e.target.closest('.lang-btn');
+          if (!btn) return;
+          const lang = btn.getAttribute('data-set-lang') === 'en' ? 'en' : 'pt';
+          try { localStorage.setItem(KEY, lang); } catch (_) {}
+          apply(lang);
+        });
+        sync();
+        document.addEventListener('astro:page-load', sync);
+      })();
+    </script>
+
     <!-- Copiar código -->
     <script is:inline>
       (() => {
