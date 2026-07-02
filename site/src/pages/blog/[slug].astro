@@ -74,4 +74,21 @@ const tags = (post.tags ?? []).filter((t) => !/^[0-9a-f]{6,}$/i.test(t)).slice(0
 
     <a class="back" href={base} style="margin-top:40px">← Voltar ao blog</a>
   </article>
+
+  <style is:global>
+    /* lupa só ao passar por cima das imagens do post (não no texto) */
+    .post-body img, .post-cover { cursor: zoom-in; }
+    .post-body .yt-facade img { cursor: pointer; }
+  </style>
+
+  <script>
+    // clicar numa imagem do post abre ela em tamanho real numa nova aba
+    document.querySelectorAll('.post-body img, .post-cover').forEach((im) => {
+      if (im.closest('.yt-facade')) return; // thumbnail do YouTube mantém o clique próprio
+      im.addEventListener('click', () => {
+        const src = im.currentSrc || im.src;
+        if (src) window.open(src, '_blank', 'noopener');
+      });
+    });
+  </script>
 </Base>
