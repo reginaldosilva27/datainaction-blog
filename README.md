@@ -1,11 +1,23 @@
 # data/in/action
 
-Blog **DataInAction** — engenharia de dados na prática, por Reginaldo Silva.
+**Fala dataholics!** Esse é o código por trás do [**datainaction.dev**](https://datainaction.dev), o meu blog de dados e IA, feito na prática.
 
-Site estático construído com [Astro](https://astro.build), hospedado no GitHub Pages
-em **[datainaction.dev](https://datainaction.dev)**.
+Aqui eu compartilho tutoriais, experimentos e os bastidores do dia a dia de **Databricks, Delta Lake, Azure, Microsoft Foundry, Copilot, RAG e agentes de IA em produção**. Conteúdo direto ao ponto, do jeito que eu gosto: conceito, mão na massa e o "por que isso importa".
 
-## Estrutura
+> Blog de dados e IA, por Reginaldo Silva.
+> Site em [datainaction.dev](https://datainaction.dev) · YouTube [@dadosemacao](https://www.youtube.com/@dadosemacao) · [LinkedIn](https://www.linkedin.com/in/reginaldosilva27/)
+
+## O que você encontra por aqui
+
+- **Dados** · Databricks, Delta Lake, Apache Spark, Unity Catalog, Lakehouse, PySpark
+- **IA & Agentes** · Agentes de IA, RAG, LangGraph, CrewAI, MCP, Copilot, AI Engineering
+- **Cloud** · Azure, Azure AI Services, Microsoft Foundry, AWS, GCP
+
+E no canal do YouTube tem os vídeos que acompanham vários posts, o **AI Agent Simulator** e os conteúdos de IA que mais bombaram. Dá uma passada lá.
+
+## Como o site é feito
+
+Nada de mágico por baixo: é um site estático em [**Astro**](https://astro.build), publicado no **GitHub Pages** com domínio próprio. Os posts são bilíngues (PT/EN, com seletor de idioma), e o conteúdo inteiro mora num JSON versionado, sem banco de dados nem CMS.
 
 ```
 .
@@ -17,17 +29,16 @@ em **[datainaction.dev](https://datainaction.dev)**.
    │  └─ images/                  # imagens dos posts (versionadas)
    └─ src/
       ├─ data/posts.json          # conteúdo dos posts (versionado)
-      ├─ layouts/Base.astro       # layout base (header, footer, transições)
+      ├─ layouts/Base.astro       # layout base (header, footer, transições, seletor PT/EN)
       ├─ pages/
-      │  ├─ index.astro           # arquivo / lista de posts
+      │  ├─ index.astro           # home / lista de posts
       │  └─ blog/[slug].astro     # página de cada post
       └─ styles/global.css
 ```
 
-Os posts vivem em `site/src/data/posts.json` e as imagens em `site/public/images/`.
-Ambos são versionados — o deploy só roda `astro build`, sem gerar esses arquivos.
+Os posts vivem em `site/src/data/posts.json` e as imagens em `site/public/images/`. Os dois são versionados, o deploy só roda `astro build` e não gera esses arquivos.
 
-## Desenvolvimento
+## Rodando localmente
 
 ```bash
 cd site
@@ -44,9 +55,14 @@ npm run preview  # serve o build localmente
 
 ## Deploy
 
-O deploy é automático: todo push na branch `main` dispara o workflow
-`.github/workflows/deploy.yml`, que faz o `astro build` da pasta `site/` e
-publica no GitHub Pages. Também pode ser disparado manualmente via
-*workflow_dispatch*.
+O deploy é automático: todo push na branch `main` dispara o workflow `.github/workflows/deploy.yml`, que faz o `astro build` da pasta `site/` e publica no GitHub Pages. Dá pra disparar na mão também, via *workflow_dispatch*. O domínio próprio vem do arquivo `site/public/CNAME`.
 
-O domínio próprio é configurado pelo arquivo `site/public/CNAME`.
+## Sobre esse repositório
+
+Esse é o repositório do meu **blog pessoal**, e ele está aberto de propósito. Não tem nada sensível aqui, é tudo conteúdo público que eu já publico no site, então resolvi deixar o código todo à mostra.
+
+Pode reaproveitar o que quiser: a estrutura do site, o layout em Astro, o esquema do `posts.json`, o pipeline de deploy no GitHub Pages, qualquer coisa. Se te ajudar a montar o seu próprio blog ou a estudar como isso funciona, já valeu a pena. Conteúdo **100% free e open**.
+
+Se usar algo daqui e quiser trocar uma ideia, me chama no [LinkedIn](https://www.linkedin.com/in/reginaldosilva27/) ou comenta lá no [YouTube](https://www.youtube.com/@dadosemacao).
+
+Fique bem e até a próxima.
