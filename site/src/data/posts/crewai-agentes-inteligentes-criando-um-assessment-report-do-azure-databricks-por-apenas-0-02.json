@@ -1,0 +1,19 @@
+{
+  "slug": "crewai-agentes-inteligentes-criando-um-assessment-report-do-azure-databricks-por-apenas-0-02",
+  "title": "CrewAI - Agentes inteligentes criando um Assessment Report do Azure Databricks por apenas $0,02",
+  "excerpt": "Já pensou em criar um assessment do seu ambiente Databricks com agentes inteligentes por apenas $0,02?",
+  "date": "2024-12-17T11:06:33.815Z",
+  "minutesToRead": 1,
+  "tags": [
+    "crewai",
+    "multiagents",
+    "databricks",
+    "assessment",
+    "automation",
+    "databricks",
+    "dataholics",
+    "datainaction"
+  ],
+  "cover": null,
+  "html": "<p>Já pensou em criar um assessment do seu ambiente Databricks com agentes inteligentes por apenas $0,02?\n\nNo video de hoje vamos ver como criar 3 agentes para automatizar um Assessment de ambiente Databricks, são eles:\n- Especialista Terraform \n- Especialista Databricks\n- Especialista em documentação\n\nEsses 3 \"caras\" vão gerar um documento bem legal do seu ambiente.\n\nMas Reginaldo, o que terraform tem a ver com isso? Bom assiste aí e comenta o que achou do report gerado.</p>\n<p></p>\n<p><a href=\"https://youtu.be/f8IOAqRFuwI\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p></p>\n<p>Terraform: <u><a href=\"https://www.youtube.com/watch?v=uaPH6jDYzmw\" target=\"_blank\" rel=\"noopener\">https://www.youtube.com/watch?v=uaPH6jDYzmw</a></u>\n<u><a href=\"https://registry.terraform.io/providers/databricks/databricks/0.5.4/docs/guides/experimental-exporter\" target=\"_blank\" rel=\"noopener\">https://registry.terraform.io/providers/databricks/databricks/0.5.4/docs/guides/experimental-exporter</a></u>\n\nLink Github:\n<u><a href=\"https://github.com/reginaldosilva27/terraform_file_summary_agent/tree/main\" target=\"_blank\" rel=\"noopener\">https://github.com/reginaldosilva27/terraform_file_summary_agent/tree/main</a></u>\n\n#crewai #multiagents #databricks #assessment #automation #databricks #dataholics #datainaction</p>\n<p></p>"
+}

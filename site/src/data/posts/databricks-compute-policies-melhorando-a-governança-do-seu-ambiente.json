@@ -1,0 +1,10 @@
+{
+  "slug": "databricks-compute-policies-melhorando-a-governança-do-seu-ambiente",
+  "title": "Databricks Compute Policies - Melhorando a governança do seu ambiente",
+  "excerpt": "Você trabalha com Databricks e não utiliza policies para aumentar a governança do seu ambiente? WTF?!",
+  "date": "2024-12-17T11:07:56.352Z",
+  "minutesToRead": 1,
+  "tags": [],
+  "cover": null,
+  "html": "<p>Você trabalha com Databricks e não utiliza policies para aumentar a governança do seu ambiente? WTF?!\n\nSe você é engenheiro de dados, Platform Admin, Support, entre outras funções utilizando Databricks você precisa conhecer e aplicar Compute Policies no seu ambiente.\n\nNesse vídeo mostrarei na prática como criar policies para aumentar a governança do seu ambiente Databricks, o que veremos nesse vídeo:\n- Criação de um ambiente com Terraform - Policies, Clusters e Jobs\n- Conheceremos as default Policies\n- Como Desabilitar a policy Personal Compute e liberar somente via permissão de acesso\n- Criação de policies customizadas - Não deixe seu ambiente virar bagunça, controle seus custos\n- Forçando Policy Compliance nos seus Jobs e Cluster - Atualizando clusters em massa\n</p>\n<p></p>\n<p><a href=\"https://youtu.be/7u6iwGwxmwo\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p>\nLink do Github:\n<u><a href=\"https://github.com/reginaldosilva27/databrickspolicies/tree/main\" target=\"_blank\" rel=\"noopener\">https://github.com/reginaldosilva27/databrickspolicies/tree/main</a></u>\n\nFique bem e até a próxima.</p>\n<p></p>"
+}

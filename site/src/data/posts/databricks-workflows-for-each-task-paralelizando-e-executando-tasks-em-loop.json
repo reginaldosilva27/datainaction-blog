@@ -1,0 +1,10 @@
+{
+  "slug": "databricks-workflows-for-each-task-paralelizando-e-executando-tasks-em-loop",
+  "title": "Databricks Workflows - For each Task - Paralelizando e executando tasks em loop",
+  "excerpt": "Databricks Workflows - For each Task - Paralelizando e executando tasks em loop",
+  "date": "2024-09-01T14:50:36.274Z",
+  "minutesToRead": 1,
+  "tags": [],
+  "cover": null,
+  "html": "<p>Fala pessoal, mais um vídeo sobre novidades no Databricks, hoje veremos como usar a task For Each para paralelizar e rodar tasks em loop, um recurso já disponível em diversas outras ferramentas e agora disponível no Databricks Workflows.</p>\n<p></p>\n<p>Para aplicar em um exemplo prático criei um cenário bem legal e comum em diversos ambientes, a necessidade de ingerir várias tabelas em Loop e paralelo.</p>\n<p></p>\n<p>O que veremos nesse vídeo:</p>\n<ul><li><p>Criando uma tabela de controle de ingestão</p></li><li><p>Gerando uma lista de Json com Struct e to_json()</p></li><li><p>Setando parâmetros em tasks e passando para outras tasks</p></li><li><p>Criando um notebook de ingestão parametrizado</p></li><li><p>Criando uma task For each que recebe uma lista de Json</p></li><li><p>Executando ingestão de 10 tabelas em loop e paralelismo de 5</p></li></ul>\n<p></p>\n<p><a href=\"https://youtu.be/p8aH_Ki3J4w\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p>Obs: Vídeo na velocidade 1.2x para caber em algumas plataformas.</p>\n<p></p>\n<p>Que achou?</p>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p></p>\n<p>Link no Github:</p>\n<p><u><a href=\"https://github.com/reginaldosilva27/Databricks/tree/main/tips/foreach\" target=\"_blank\" rel=\"noopener\">https://github.com/reginaldosilva27/Databricks/tree/main/tips/foreach</a></u></p>\n<p></p>\n<p>Referencias:</p>\n<p><u><a href=\"https://docs.databricks.com/en/jobs/for-each.html\" target=\"_blank\" rel=\"noopener\">https://docs.databricks.com/en/jobs/for-each.html</a></u></p>\n<p><u><a href=\"https://www.databricks.com/blog/whats-new-workflows\" target=\"_blank\" rel=\"noopener\">https://www.databricks.com/blog/whats-new-workflows</a></u></p>\n<p></p>"
+}

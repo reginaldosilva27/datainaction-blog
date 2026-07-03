@@ -1,0 +1,15 @@
+{
+  "slug": "azcopy-use-case-backup-your-logs",
+  "title": "AzCopy: Use Case - Backup your logs",
+  "excerpt": "Neste vídeo mostro um caso prático para implementação do AzCopy, lembre-se a imaginação é o nosso limite.",
+  "date": "2020-09-01T08:29:01.310Z",
+  "minutesToRead": 1,
+  "tags": [
+    "azcopy",
+    "cloud",
+    "bigdata",
+    "datainaction"
+  ],
+  "cover": "images/media_a794bc_1fca3989852c4f1aa75ad59cbf614cc8_mv2.png",
+  "html": "<p>Olá pessoal. No último post falei sobre a ferramenta AzCopy, confira no link abaixo:</p>\n<blockquote><p><u><a href=\"https://www.datainaction.dev/blog/azcopy-sincronizando-dados-com-sua-azure-storage-account/\" target=\"_blank\" rel=\"noopener\">https://www.datainaction.dev/blog/azcopy-sincronizando-dados-com-sua-azure-storage-account/</a></u> </p></blockquote>\n<p>Neste vídeo mostro um caso prático para implementação do AzCopy, lembre-se a imaginação é o nosso limite, não se prenda a exemplos, utilize-os para criar ideias baseadas no seu mundo.</p>\n<p></p>\n<p><a href=\"https://www.youtube.com/watch?v=35ZQHSlVBtE&amp;t=210s\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p></p>\n<p>#AzCopy #Cloud #BigData #DataInAction</p>"
+}

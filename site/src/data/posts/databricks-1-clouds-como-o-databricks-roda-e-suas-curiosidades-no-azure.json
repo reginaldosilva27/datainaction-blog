@@ -1,0 +1,18 @@
+{
+  "slug": "databricks-1-clouds-como-o-databricks-roda-e-suas-curiosidades-no-azure",
+  "title": "Databricks [1] - Clouds, como o Databricks roda e suas curiosidades no Azure",
+  "excerpt": "Curiosidades como:\n- Data Plane vs Control Plane\n- Containers?!\n- Você sabia que os dados do Display() vai para conta da Databricks?",
+  "date": "2023-02-08T10:36:06.888Z",
+  "minutesToRead": 1,
+  "tags": [
+    "data",
+    "cloud",
+    "azure",
+    "gcp",
+    "aws",
+    "databricks",
+    "datainaction"
+  ],
+  "cover": "images/media_a794bc_87ecd53d237746efa6be04dcd33505a8_mv2.jpg",
+  "html": "<p></p>\n<p>Seguindo nossa série sobre Databricks (e não é que saiu rsrs), nesse vídeo abordo características e curiosidades de como o Databricks roda em Cloud, quais Clouds (não é surpresa ou não deveria rs), algumas diferenças entre as Clouds, diferenças entre Premium e Standard e por fim entramos em particularidades do Azure.</p>\n<p> </p>\n<p>Abordei várias temas e curiosidades como:</p>\n<p>- Data Plane vs Control Plane</p>\n<p>- Custos</p>\n<p>- Resource groups</p>\n<p>- Dados de notebooks armazenados na conta da Databricks?</p>\n<p>- Containers?!</p>\n<p>- Você sabia que os dados do Display() vai para conta da Databricks?</p>\n<p>- E mais algumas outras dicas</p>\n<p> </p>\n<p>Da uma conferida lá.</p>\n<p></p>\n<p><a href=\"https://www.youtube.com/watch?v=2bo4cNaAtfk\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Github:</p>\n<p><u><a href=\"https://github.com/reginaldosilva27/databricks_0_100/tree/main/Databricks%5B1%5D-Clouds\" target=\"_blank\" rel=\"noopener\">https://github.com/reginaldosilva27/databricks_0_100/tree/main/Databricks%5B1%5D-Clouds</a></u></p>\n<p> </p>\n<p>Últimos vídeos:</p>\n<p>Databricks 0</p>\n<blockquote><p><u><a href=\"https://www.datainaction.dev/blog/databricks-0-a-100-0-terraform-e-databricks/\" target=\"_blank\" rel=\"noopener\">https://www.datainaction.dev/blog/databricks-0-a-100-0-terraform-e-databricks/</a></u> </p></blockquote>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p></p>\n<p><strong>#data #cloud #azure #gcp #aws #databricks #datainaction</strong></p>"
+}

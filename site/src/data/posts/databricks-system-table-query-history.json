@@ -1,0 +1,10 @@
+{
+  "slug": "databricks-system-table-query-history",
+  "title": "Databricks - System Table - Query History",
+  "excerpt": "Conheça a nova system table Query History e automatize suas rotinas.",
+  "date": "2024-08-28T11:45:18.804Z",
+  "minutesToRead": 1,
+  "tags": [],
+  "cover": null,
+  "html": "<p>Fala pessoal, no vídeo apresento uma nova system table sensacional que pode te ajudar a automatizar muitas coisas.</p>\n<p></p>\n<p>Primeiro mostro como era feito antes via API, depois como habilitar todas as system tables disponíveis para a sua conta.</p>\n<p></p>\n<p>Com a system table Query History disponível abre uma possibilidade gigante de automações, algumas coisas como:</p>\n<p>* Automatizar um checklist de queries mais lentas</p>\n<p>* Aonde minhas queries estão gastando mais tempo</p>\n<p>* Quais usuários executam mais queries</p>\n<p>* Quais os Warehouse (de todos os workspaces daquela região) mais usados</p>\n<p>* Quais as queries mais executadas</p>\n<p>* Queries por Status</p>\n<p>* Tenho queries enfileiradas (Queued)?</p>\n<p>* Etc...</p>\n<p></p>\n<p>Tenho certeza que vai te ajudar muito essa nova system table.</p>\n<p></p>\n<p><a href=\"https://youtu.be/uA_-XTLV71w\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p></p>\n<p><span style=\"color:rgba(0, 0, 0, 0.9);\">Link para habilitar as system tables:</span></p>\n<p><span style=\"color:var(--color-action);\"><a href=\"https://notebooks.databricks.com/demos/uc-04-system-tables/index.html?_gl=1*ja3g10*_gcl_aw*R0NMLjE2OTYzNTMwMzAuQ2p3S0NBanc5LTZvQmhCYUVpd0FIdjFRdkhjenNqWmFaTmRSaWpIOWxEOEJINXRHb3VMQ2ZMWmc4dEpfRjNjUS1Gczg1d1FwZzk1UGpob0MtdGNRQXZEX0J3RQ#\" target=\"_blank\" rel=\"noopener\">https://notebooks.databricks.com/demos/uc-04-system-tables/index.html?_gl=1*ja3g10*_gcl_aw*R0NMLjE2OTYzNTMwMzAuQ2p3S0NBanc5LTZvQmhCYUVpd0FIdjFRdkhjenNqWmFaTmRSaWpIOWxEOEJINXRHb3VMQ2ZMWmc4dEpfRjNjUS1Gczg1d1FwZzk1UGpob0MtdGNRQXZEX0J3RQ#</a></span></p>"
+}

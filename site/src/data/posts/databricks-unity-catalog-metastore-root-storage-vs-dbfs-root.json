@@ -1,0 +1,16 @@
+{
+  "slug": "databricks-unity-catalog-metastore-root-storage-vs-dbfs-root",
+  "title": "Databricks - Unity Catalog Metastore Root Storage vs DBFS Root",
+  "excerpt": "Entenda de uma vez o que é Metastore Root Storage e DBFS Root.",
+  "date": "2024-10-14T12:05:29.498Z",
+  "minutesToRead": 1,
+  "tags": [
+    "databricks",
+    "unitycatalog",
+    "metastore",
+    "dbfs",
+    "storage"
+  ],
+  "cover": null,
+  "html": "<p>Fala pessoal, ótima semana a todos e vamos de conteúdo sobre Databricks.</p>\n<p></p>\n<p>Nesse vídeo iremos desmistificar o que é o Metastore Root Storage vs DBFS Root Storage, quando usar cada um e suas particularidades.</p>\n<p></p>\n<p>Veremos exemplos práticos e detalhados sobre cada um desses tópicos, assiste aí e me diz o que achou.</p>\n<p><a href=\"https://youtu.be/EotTBBd8jEs\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p><strong>#databricks</strong> <strong>#unitycatalog</strong> <strong>#metastore</strong> <strong>#dbfs</strong> <strong>#storage</strong></p>\n<p></p>\n<p></p>"
+}

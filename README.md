@@ -28,7 +28,7 @@ Nada de mágico por baixo: é um site estático em [**Astro**](https://astro.bui
    │  ├─ CNAME                    # domínio próprio (datainaction.dev)
    │  └─ images/                  # imagens dos posts (versionadas)
    └─ src/
-      ├─ data/posts.json          # conteúdo dos posts (versionado)
+      ├─ data/posts/              # 1 arquivo <slug>.json por post (versionado)
       ├─ layouts/Base.astro       # layout base (header, footer, transições, seletor PT/EN)
       ├─ pages/
       │  ├─ index.astro           # home / lista de posts
@@ -36,7 +36,7 @@ Nada de mágico por baixo: é um site estático em [**Astro**](https://astro.bui
       └─ styles/global.css
 ```
 
-Os posts vivem em `site/src/data/posts.json` e as imagens em `site/public/images/`. Os dois são versionados, o deploy só roda `astro build` e não gera esses arquivos.
+Os posts vivem em `site/src/data/posts/` (um arquivo `<slug>.json` por post) e as imagens em `site/public/images/`. Os dois são versionados, o deploy só roda `astro build` e não gera esses arquivos.
 
 ## Rodando localmente
 
@@ -61,7 +61,7 @@ O deploy é automático: todo push na branch `main` dispara o workflow `.github/
 
 Esse é o repositório do meu **blog pessoal**, e ele está aberto de propósito. Não tem nada sensível aqui, é tudo conteúdo público que eu já publico no site, então resolvi deixar o código todo à mostra.
 
-Pode reaproveitar o que quiser: a estrutura do site, o layout em Astro, o esquema do `posts.json`, o pipeline de deploy no GitHub Pages, qualquer coisa. Se te ajudar a montar o seu próprio blog ou a estudar como isso funciona, já valeu a pena. Conteúdo **100% free e open**.
+Pode reaproveitar o que quiser: a estrutura do site, o layout em Astro, o esquema dos arquivos de post em `src/data/posts/`, o pipeline de deploy no GitHub Pages, qualquer coisa. Se te ajudar a montar o seu próprio blog ou a estudar como isso funciona, já valeu a pena. Conteúdo **100% free e open**.
 
 Se usar algo daqui e quiser trocar uma ideia, me chama no [LinkedIn](https://www.linkedin.com/in/reginaldosilva27/) ou comenta lá no [YouTube](https://www.youtube.com/@dadosemacao).
 

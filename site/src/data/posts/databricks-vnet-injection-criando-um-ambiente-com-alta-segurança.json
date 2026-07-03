@@ -1,0 +1,10 @@
+{
+  "slug": "databricks-vnet-injection-criando-um-ambiente-com-alta-segurança",
+  "title": "Databricks - VNET Injection - Criando um ambiente com alta segurança",
+  "excerpt": "Como colocar seu Databricks dentro de uma VNET e fechado para internet.",
+  "date": "2024-10-22T11:29:08.521Z",
+  "minutesToRead": 1,
+  "tags": [],
+  "cover": null,
+  "html": "<p>Fala pessoal, ótima semana a todos, no vídeo de hoje vamos aprender como implementar o Databricks dentro de uma VNET e fechado para internet, acessando somente de dentro da rede interna, esse tipo de implementação é relativamente complexo e muito exigido para empresas maiores que tem políticas de segurança avançada.</p>\n<p></p>\n<p>No vídeo abordarei todos os principais componentes e veremos na PRÁTICA como implementar, falei sobre:</p>\n<p>- Como o Databricks é implementado</p>\n<p>- Resource Groups</p>\n<p>- VNET (Virtual Network)</p>\n<p>- Subnets</p>\n<p>- Ranges CIDR</p>\n<p>- NSG (Network Security Groups)</p>\n<p>- Private Endpoint</p>\n<p>- Private DNS</p>\n<p>- Peering entre VNETS</p>\n<p>- VPN Gateway</p>\n<p>- Route Tables</p>\n<p>- NAT Gateway</p>\n<p>- e muito mais</p>\n<p></p>\n<p>Calma, se você não está habituado a esses termos de infraestrutura e redes não se preocupe, abordarei de maneira simples, você terá a base para poder planejar ambientes de alta segurança com Databricks.</p>\n<p></p>\n<p>Espero que ajude.</p>\n<p></p>\n<p><a href=\"https://youtu.be/do8-ViXuJss\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Link do desenho:</p>\n<p><u><a href=\"https://github.com/reginaldosilva27/Databricks/blob/main/tips/VNET/Databricks.jpg\" target=\"_blank\" rel=\"noopener\">https://github.com/reginaldosilva27/Databricks/blob/main/tips/VNET/Databricks.jpg</a></u></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>"
+}

@@ -1,0 +1,10 @@
+{
+  "slug": "crewai-fastapi-streamlit-criar-uma-aplicação-com-agentes-inteligentes",
+  "title": "CrewAI - FastAPI + Streamlit - Criar uma aplicação com Agentes inteligentes",
+  "excerpt": "Criando uma API com seus Agentes inteligentes e disponibilizando um interface grafica.",
+  "date": "2024-07-26T12:12:58.592Z",
+  "minutesToRead": 1,
+  "tags": [],
+  "cover": "images/media_a794bc_030e4dd34a134c79b245643d8d516c46_mv2.png",
+  "html": "<p>Fala pessoal, sextou e estou empolgado com esse mundo de IA e Multi-agent system, no último vídeo falei um pouco sobre CrewAI e mostrei alguns agentes trabalhando em conjunto para criar uma documentação robusta.</p>\n<p></p>\n<p>No vídeo de hoje quero mostrar algo um pouco além, indo na linha de como produtizar seus agentes, aqui trago algumas opções interessantes como FastAPI para liberar uma API para acessar os seus agentes e o Streamlit para colocar uma interface gráfica bem simples.</p>\n<p></p>\n<p>Na demo de hoje criei um agente que fara uma pesquisa de candidatos para uma vaga, os requisitos serão o parâmetro de entrada, dá uma olhada como ficou no final.</p>\n<p></p>\n<p>Existem diversos frameworks para se trabalhar com Multi-agent System, alguns como: LangGraph (LangChain), AutoGen, MetaGPT, AutoGPT, etc.</p>\n<p></p>\n<p>Mas tenho gostado muito do que o <span style=\"color:var(--color-text);\"><a href=\"https://www.linkedin.com/feed/#\" target=\"_blank\" rel=\"noopener\"><strong>crewAI</strong></a></span> oferece, além das features sensacionais a simplicidade e facilidade é ajuda muito.</p>\n<p></p>\n<p><a href=\"https://youtu.be/I-n9iTb6nis\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p></p>\n<p>Código Github:</p>\n<p><u><a href=\"https://github.com/reginaldosilva27/crewai/tree/main/PesquisaCandidatos\" target=\"_blank\" rel=\"noopener\">https://github.com/reginaldosilva27/crewai/tree/main/PesquisaCandidatos</a></u></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>"
+}

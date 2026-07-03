@@ -1,0 +1,10 @@
+{
+  "slug": "databricks-table-lineage-monitorando-tabelas-mais-utilizadas-e-tabelas-não-utilizadas",
+  "title": "Databricks Table Lineage - Monitorando tabelas mais utilizadas e tabelas não utilizadas",
+  "excerpt": "Você trabalha com Unity Catalog e não monitora as tabelas mais utilizadas e tabelas não utilizadas? Dá uma olhada nesse vídeo, onde falo...",
+  "date": "2024-11-05T01:01:26.770Z",
+  "minutesToRead": 1,
+  "tags": [],
+  "cover": null,
+  "html": "<p>Você trabalha com Unity Catalog e não monitora as tabelas mais utilizadas e tabelas não utilizadas?</p>\n<p></p>\n<p>Dá uma olhada nesse vídeo, onde falo sobre Databricks Table Lineage uma system table do Unity Catalog que vai te entregar muita informação.</p>\n<p></p>\n<p>Com essa System table podemos responder algumas perguntas como:</p>\n<p>- Quais são as tabelas mais utilizadas?</p>\n<p>- Quem usam essas tabelas?</p>\n<p>- Como acessam? Dashboard, Jobs, Notebooks, Script SQL?</p>\n<p>- Quais tabelas menos utilizadas?</p>\n<p>- Quais tabelas que só tem escritas, mas não tem leitura?</p>\n<p></p>\n<p>Bom, em posse desse conhecimento a sua criatividade e necessidade é o limite.</p>\n<p></p>\n<p>Responder essas perguntas é essencial para uma melhor administração do seu ambiente.</p>\n<p></p>\n<p>Comenta se você já usava essas system tables?</p>\n<p><a href=\"https://www.youtube.com/watch?v=eOCF-wcVZZc\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Link Github:</p>\n<p><u><a href=\"https://github.com/reginaldosilva27/Databricks/tree/main/tips/Table%20lineage\" target=\"_blank\" rel=\"noopener\">https://github.com/reginaldosilva27/Databricks/tree/main/tips/Table%20lineage</a></u></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>"
+}

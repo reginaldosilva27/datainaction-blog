@@ -1,0 +1,15 @@
+{
+  "slug": "databricks-account-usage-dashboard-monitore-o-custo-do-seu-ambiente",
+  "title": "Databricks - Account Usage Dashboard - Monitore o custo do seu ambiente",
+  "excerpt": "Monitore os custos do seu ambiente com o Account Usage Dashboard",
+  "date": "2024-08-23T12:29:24.094Z",
+  "minutesToRead": 1,
+  "tags": [
+    "databricks",
+    "dashboard",
+    "usage",
+    "billing"
+  ],
+  "cover": null,
+  "html": "<p>Fala pessoal, nesse vídeo conheceremos um dashboard disponibilizado pela Databricks para monitoramento de custos de todos seus ambientes Databricks, todos os workspaces e no menor nível de detalhe. </p>\n<p></p>\n<p>E o mais legal, podemos customizar esse dashboard e também agendar para receber um PDF via e-mail, apenas assinando o dashboard. Que achou? <a href=\"https://www.youtube.com/hashtag/databricks\" target=\"_blank\" rel=\"noopener\">#databricks</a> <a href=\"https://www.youtube.com/hashtag/dashboard\" target=\"_blank\" rel=\"noopener\">#dashboard</a> <a href=\"https://www.youtube.com/hashtag/usage\" target=\"_blank\" rel=\"noopener\">#usage</a> <a href=\"https://www.youtube.com/hashtag/billing\" target=\"_blank\" rel=\"noopener\">#billing</a></p>\n<p></p>\n<p><a href=\"https://youtu.be/MeFoPtJTt30\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p></p>\n<p>Referencia:</p>\n<p><u><a href=\"https://docs.databricks.com/en/admin/account-settings/usage.html\" target=\"_blank\" rel=\"noopener\">https://docs.databricks.com/en/admin/account-settings/usage.html</a></u></p>"
+}

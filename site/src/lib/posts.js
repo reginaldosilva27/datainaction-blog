@@ -6,8 +6,16 @@
 // card nem entra no HTML (não vaza por URL nem pro Google). Ele "brota"
 // sozinho no build seguinte à data (o cron diário do deploy.yml garante isso).
 //
-// Use SEMPRE `posts` daqui no lugar de importar `data/posts.json` cru.
-import all from '../data/posts.json';
+// Use SEMPRE `posts` daqui no lugar de ler os arquivos de `data/posts/` crus.
+//
+// Cada post é um arquivo `src/data/posts/<slug>.json`. Carregamos todos no
+// build via glob (eager) e ordenamos por `date` desc (mais recente primeiro),
+// preservando o mesmo contrato do antigo array `posts.json`. Como o glob do
+// Vite ordena por nome de arquivo, a ordenação por data aqui é obrigatória.
+const modules = import.meta.glob('../data/posts/*.json', { eager: true });
+const all = Object.values(modules)
+  .map((m) => m.default ?? m)
+  .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
 export function isPublished(post, now = new Date()) {
   if (!post.publishAt) return true;

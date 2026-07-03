@@ -1,0 +1,18 @@
+{
+  "slug": "crewai-agentes-criando-e-rodando-código",
+  "title": "CrewAI - Agentes criando e rodando código?!",
+  "excerpt": "Agentes de IA criando e executando códigos.",
+  "date": "2024-08-01T01:34:19.655Z",
+  "minutesToRead": 1,
+  "tags": [
+    "datainaction",
+    "crewai",
+    "ia",
+    "multiagent",
+    "agentic",
+    "coder",
+    "tools"
+  ],
+  "cover": "images/media_a794bc_9425831b7eb04fb29c669ae02ffac3d6_mv2.png",
+  "html": "<p>No vídeo de hoje criaremos agentes inteligentes com crewAI e daremos a ele uma ferramenta que permite criarem e executarem código, isso é realmente SURREAL.</p>\n<p></p>\n<p>Nesse vídeo mostrei um agente criar um inventário de Jobs do Databricks, com colunas customizadas, no final ele gera um código e executa esse código dentro de um sandbox em Docker, de forma segura e confiável.</p>\n<p></p>\n<p>Resultado gerado em HTML:</p>\n<figure><img src=\"images/media_a794bc_50707fba857e40ae84b3c8967085164b_mv2.png\" alt=\"\" loading=\"lazy\"></figure>\n<p></p>\n<p>Resultado gerado com biblioteca Tabulate em python:</p>\n<figure><img src=\"images/media_a794bc_9425831b7eb04fb29c669ae02ffac3d6_mv2.png\" alt=\"\" loading=\"lazy\"></figure>\n<p></p>\n<p>O resultado é realmente sensacional, com certeza fará você economizar horas de trabalho.</p>\n<p></p>\n<p>Lembre-se, não seremos substituídos por IA e sim por pessoas que fazem um bom uso dela.</p>\n<p></p>\n<p><a href=\"https://youtu.be/mA1At_BafkY\" target=\"_blank\" rel=\"noopener\">[vídeo]</a></p>\n<p></p>\n<p>Fique bem e até a próxima.</p>\n<p></p>\n<p>#Datainaction #CrewAI #IA #MultiAgent #Agentic #Coder #Tools</p>"
+}
