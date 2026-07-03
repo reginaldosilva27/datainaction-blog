@@ -9,5 +9,8 @@ export default defineConfig({
   output: 'static',
   // Gera sitemap-index.xml + sitemap-0.xml no build (só das páginas que existem,
   // então posts agendados por publishAt ficam de fora até serem publicados).
-  integrations: [sitemap()],
+  // filter: tira do sitemap as páginas de redirect das URLs antigas do Wix
+  // (/post/<slug> e /en/post/<slug> -> /blog/<slug>/); elas são noindex e não
+  // devem ser anunciadas pro Google (senão viram "Page with redirect").
+  integrations: [sitemap({ filter: (page) => !page.includes('/post/') })],
 });

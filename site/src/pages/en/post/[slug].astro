@@ -1,0 +1,27 @@
+---
+// Redirect das URLs antigas do Wix em inglês (`/en/post/<slug>`) para o post
+// novo (`/blog/<slug>/`). O seletor PT/EN vive na própria página do post
+// (via ?lang=en quando há tradução), então mandamos pro post canônico.
+// Mesma lógica de meta-refresh do `/post/<slug>` (ver comentário lá).
+import posts from '../../../lib/posts.js';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { slug: p.slug } }));
+}
+
+const { slug } = Astro.props;
+const target = new URL(`blog/${slug}/`, Astro.site).href;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex" />
+    <title>Redirecionando…</title>
+  </head>
+  <body>
+    <p>Esta página mudou de endereço. Redirecionando para <a href={target}>{target}</a>…</p>
+  </body>
+</html>

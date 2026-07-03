@@ -1,0 +1,30 @@
+---
+// Redirect das URLs antigas do Wix (`/post/<slug>`) para a estrutura nova
+// do Astro (`/blog/<slug>/`). O GitHub Pages não faz 301 de servidor, então
+// geramos uma página de redirect (meta-refresh 0s + canonical), que o Google
+// consolida como um 301 e transfere o ranking pro post novo.
+//
+// Só geramos redirect para slugs que EXISTEM hoje: um `/post/<slug-removido>`
+// continua caindo em 404 (comportamento correto).
+import posts from '../../lib/posts.js';
+
+export function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug }, props: { slug: p.slug } }));
+}
+
+const { slug } = Astro.props;
+const target = new URL(`blog/${slug}/`, Astro.site).href;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <meta name="robots" content="noindex" />
+    <title>Redirecionando…</title>
+  </head>
+  <body>
+    <p>Esta página mudou de endereço. Redirecionando para <a href={target}>{target}</a>…</p>
+  </body>
+</html>
