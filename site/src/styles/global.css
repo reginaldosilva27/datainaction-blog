@@ -841,6 +841,56 @@ a { color: inherit; }
 }
 .filter.is-active span { color: var(--c, var(--accent)); }
 
+/* ---------- busca de artigos ---------- */
+.search {
+  max-width: var(--maxw);
+  margin: 20px auto 0;
+  padding: 0 clamp(20px, 5vw, 56px);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search svg {
+  position: absolute;
+  left: clamp(32px, calc(5vw + 12px), 68px);
+  color: var(--muted);
+  pointer-events: none;
+}
+.search input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 13px 20px 13px 46px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search input::placeholder { color: var(--muted); }
+.search input:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.no-results {
+  max-width: var(--maxw);
+  margin: 0 auto clamp(60px, 10vw, 120px);
+  padding: 40px clamp(20px, 5vw, 56px);
+  color: var(--muted);
+  text-align: center;
+}
+.no-results button {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0 4px;
+}
+
 /* ---------- footer v2 ---------- */
 .site-footer { text-align: left; padding: 56px clamp(20px, 5vw, 56px) 64px; }
 .footer-grid {

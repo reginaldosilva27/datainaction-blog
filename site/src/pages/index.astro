@@ -179,6 +179,13 @@ const thumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
     <span class="count">{total.toString().padStart(2, '0')}</span>
   </div>
 
+  <div class="search">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path>
+    </svg>
+    <input type="search" id="post-search" placeholder="Buscar por título ou palavra-chave…" autocomplete="off" aria-label="Buscar artigos" />
+  </div>
+
   <div class="filters" role="tablist">
     <button class="filter is-active" data-filter="all">Todos <span>{total}</span></button>
     {CATEGORIES.map((c) => (
@@ -194,7 +201,7 @@ const thumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
     {withCat.map((p, i) => {
       const meta = categoryMeta(p.cat);
       return (
-        <a class="card" href={`${base}blog/${p.slug}/`} data-cat={p.cat} style={`--i:${Math.min(i, 12)}`}>
+        <a class="card" href={`${base}blog/${p.slug}/`} data-cat={p.cat} data-search={`${p.title} ${p.excerpt ?? ''}`} style={`--i:${Math.min(i, 12)}`}>
           {p.cover && (
             <div class="card-cover">
               <img src={`${base}${p.cover}`} alt={p.title} loading="lazy" />
@@ -214,23 +221,58 @@ const thumb = (id) => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
     })}
   </section>
 
+  <p class="no-results" id="no-results" hidden>
+    Nenhum artigo encontrado para essa busca.
+    <button type="button" id="clear-search">Limpar</button>
+  </p>
+
   <script is:inline>
     (() => {
+      // Remove acentos p/ a busca casar "voce" com "você", "publicacao" com "publicação".
+      const deburr = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
       const setup = () => {
         const grid = document.getElementById('archive-grid');
         if (!grid) return;
         const cards = [...grid.querySelectorAll('.card')];
+        const items = cards.map((c) => ({ el: c, hay: deburr(c.dataset.search || '') }));
         const buttons = [...document.querySelectorAll('.filter')];
-        const apply = (f) => {
-          cards.forEach((c) => {
-            c.style.display = f === 'all' || c.dataset.cat === f ? '' : 'none';
+        const search = document.getElementById('post-search');
+        const noResults = document.getElementById('no-results');
+        const clearBtn = document.getElementById('clear-search');
+
+        let activeCat = 'all';
+        let query = '';
+
+        const apply = () => {
+          let visible = 0;
+          items.forEach(({ el, hay }) => {
+            const okCat = activeCat === 'all' || el.dataset.cat === activeCat;
+            const okQuery = !query || hay.includes(query);
+            const show = okCat && okQuery;
+            el.style.display = show ? '' : 'none';
+            if (show) visible += 1;
           });
-          buttons.forEach((b) => b.classList.toggle('is-active', b.dataset.filter === f));
+          buttons.forEach((b) => b.classList.toggle('is-active', b.dataset.filter === activeCat));
+          if (noResults) noResults.hidden = visible > 0;
         };
-        buttons.forEach((b) => b.addEventListener('click', () => apply(b.dataset.filter)));
-        document.querySelectorAll('[data-cat-jump]').forEach((el) =>
-          el.addEventListener('click', () => apply(el.dataset.catJump))
+
+        buttons.forEach((b) =>
+          b.addEventListener('click', () => { activeCat = b.dataset.filter; apply(); })
         );
+        document.querySelectorAll('[data-cat-jump]').forEach((el) =>
+          el.addEventListener('click', () => { activeCat = el.dataset.catJump; apply(); })
+        );
+        if (search) {
+          search.addEventListener('input', () => { query = deburr(search.value.trim()); apply(); });
+        }
+        if (clearBtn) {
+          clearBtn.addEventListener('click', () => {
+            if (search) search.value = '';
+            query = '';
+            apply();
+            search?.focus();
+          });
+        }
       };
       setup();
       document.addEventListener('astro:page-load', setup);

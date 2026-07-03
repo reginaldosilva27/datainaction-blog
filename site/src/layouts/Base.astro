@@ -1,8 +1,10 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
-const { title, description, post = false, image } = Astro.props;
+const { title, description, post = false, image, publishedTime, tags = [], headline } = Astro.props;
 const base = import.meta.env.BASE_URL;
+
+const AUTHOR = 'Reginaldo Silva';
 
 // Google Analytics 4 — troque pelo seu Measurement ID (formato G-XXXXXXXXXX).
 // Deixe '' para desligar (ex.: em dev/preview local).
@@ -20,6 +22,41 @@ const social = {
   linkedin: 'https://www.linkedin.com/in/reginaldosilva27/',
   youtube: 'https://www.youtube.com/@dadosemacao',
 };
+
+// Data de publicação em ISO (pro <meta article:published_time> e o JSON-LD).
+const publishedISO =
+  post && publishedTime ? new Date(publishedTime).toISOString() : null;
+
+// Dados estruturados (schema.org) — ajudam o Google a entender autor, data e
+// tipo de conteúdo (rich results). Post = BlogPosting; demais páginas = WebSite.
+const personLd = {
+  '@type': 'Person',
+  name: AUTHOR,
+  url: new URL(`${base}sobre/`, site).href,
+  sameAs: [social.github, social.linkedin, social.youtube],
+};
+const jsonLd = post
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: headline ?? title,
+      description,
+      image: ogImage,
+      ...(publishedISO && { datePublished: publishedISO }),
+      author: personLd,
+      publisher: personLd,
+      mainEntityOfPage: canonical,
+      url: canonical,
+      ...(tags.length && { keywords: tags.join(', ') }),
+    }
+  : {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'DataInAction',
+      url: new URL(base, site).href,
+      description,
+      author: personLd,
+    };
 ---
 <!doctype html>
 <html lang="pt-BR">
@@ -32,7 +69,9 @@ const social = {
     <meta name="theme-color" content="#1a1a1f" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    <meta name="author" content={AUTHOR} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title="DataInAction" href={new URL(`${base}rss.xml`, site).href} />
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content={post ? 'article' : 'website'} />
@@ -40,10 +79,14 @@ const social = {
     <meta property="og:site_name" content="DataInAction" />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:alt" content={title} />
+    {post && publishedISO && <meta property="article:published_time" content={publishedISO} />}
+    {post && <meta property="article:author" content={AUTHOR} />}
+    {post && tags.map((t) => <meta property="article:tag" content={t} />)}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
     <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
