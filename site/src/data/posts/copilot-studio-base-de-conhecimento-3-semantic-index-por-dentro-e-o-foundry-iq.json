@@ -5,7 +5,7 @@
   "excerpt": "O semantic index faz embedding mesmo? Tem custo? Quais as limitações? E como usar um RAG customizado no Foundry IQ como Knowledge do seu agente.",
   "excerpt_en": "Does the semantic index really make embeddings? Any cost? What are its limits? And how to use a custom RAG in Foundry IQ as your agent's Knowledge.",
   "date": "2026-07-08T12:00:00.000Z",
-  "publishAt": "2026-07-08T09:00:00-03:00",
+  "publishAt": "2026-07-08T06:00:00-03:00",
   "minutesToRead": 8,
   "tags": [
     "copilotstudio",

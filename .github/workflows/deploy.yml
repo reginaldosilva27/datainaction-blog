@@ -5,7 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
   # Rebuild diário: revela posts agendados (publishAt) quando a data chega,
-  # mesmo sem push. 09:00 e 12:00 UTC ≈ 06:00 e 09:00 BRT.
+  # mesmo sem push. Posts agendam pra 06:00 BRT; o deploy das 09:00 UTC
+  # (≈06:00 BRT) publica o post do dia, e o das 12:00 UTC (≈09:00 BRT) é
+  # rede de segurança caso o cron da manhã atrase.
   schedule:
     - cron: '0 9 * * *'
     - cron: '0 12 * * *'
