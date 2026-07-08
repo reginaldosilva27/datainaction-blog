@@ -21,3 +21,5 @@ CLAUDE.md
 linkedin-carousels/
 
 .DS_Store
+# Modo edição local (watcher de posts) - não versionar
+site/.edit/

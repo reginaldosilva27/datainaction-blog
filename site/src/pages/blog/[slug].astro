@@ -2,6 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import posts from '../../lib/posts.js';
 import { categoryOf, categoryMeta } from '../../lib/categories.js';
+// Editor inline WYSIWYG — injetado só em dev (import.meta.env.DEV). Ver src/dev/.
+import inlineEditorJs from '../../dev/inline-editor.js?raw';
 
 export function getStaticPaths() {
   return posts.map((p) => ({ params: { slug: p.slug }, props: { post: p } }));
@@ -220,4 +222,8 @@ const related = posts
       });
     }
   </script>
+
+  {import.meta.env.DEV && (
+    <script is:inline set:html={`window.__INLINE_EDIT=${JSON.stringify({ slug: post.slug, hasEn, base })};\n${inlineEditorJs}`} />
+  )}
 </Base>
