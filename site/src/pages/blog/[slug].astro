@@ -32,7 +32,9 @@ const YT = '<a\\b[^>]*href="https?:\\/\\/(?:youtu\\.be\\/|(?:www\\.)?youtube\\.c
 // Aplica as mesmas transformações (imagens, YouTube, blocos de código) em qualquer corpo HTML.
 const processBody = (html) => {
   // As URLs de imagem no html já vêm como caminhos relativos "images/...".
-  let body = html.replaceAll('src="images/', `src="${base}images/`);
+  let body = html
+    .replaceAll('src="images/', `src="${base}images/`)
+    .replaceAll('poster="images/', `poster="${base}images/`);
   // 1) quando o link está sozinho dentro de um <p>, troca o <p> inteiro
   body = body.replace(new RegExp(`<p[^>]*>\\s*(?:${YT})\\s*<\\/p>`, 'gis'), (_m, id) => facade(id));
   // 2) qualquer link remanescente

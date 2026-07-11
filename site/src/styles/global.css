@@ -475,6 +475,16 @@ a { color: inherit; }
   border: 1px solid var(--border);
   box-shadow: 0 10px 26px rgba(17, 17, 22, 0.08);
 }
+.post-body video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+  margin: 1.6em auto;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 26px rgba(17, 17, 22, 0.08);
+  background: #000;
+}
 .post-body figcaption {
   font-family: var(--font-mono);
   font-size: 0.78rem;
